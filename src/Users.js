@@ -1,15 +1,17 @@
 import React, { Component } from "react";
+import{ connect }  from "react-redux";
+import { deleteUser } from './actions/userActions';
 
-export class Users extends Component {
+class Users extends Component {
   render() {
     let userJsx =
-      this.props.userArray && this.props.userArray.length > 0 ? (
-        this.props.userArray.map((user) => (
+      this.props.reduxUserState && this.props.reduxUserState.length > 0 ? (
+        this.props.reduxUserState.map((user) => (
           <div className="card col-12 col-md-6 p-2" key={user.id}>
             <h4>{user.name}</h4>
             <button
               className="btn btn-danger"
-              onClick={() => this.props.delete(user.id)}
+              onClick={() => this.props.deleteUser(user.id)}
             >
               Delete
             </button>
@@ -35,5 +37,12 @@ export class Users extends Component {
     );
   }
 }
+//1st Parenthesis//1st argument mapStateToProps -get your redux state/data
+//2nd argument mapDispatchToProps - get your functions that can change the redux state
+//2nd parethesis-put your comment state
 
-export default Users;
+const mapStateToProps =(state) => ({
+  reduxUserState: state.users.users,
+});
+
+export default connect(mapStateToProps,{ deleteUser })(Users);
