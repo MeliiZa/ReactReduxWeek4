@@ -1,4 +1,4 @@
-import { DELETE_USER } from '../actions/actionTypes';
+import { DELETE_USER, ADD_USER } from '../actions/actionTypes';
 
 const initialState={
     users:[
@@ -31,8 +31,16 @@ const initialState={
                     users: filteredArray,
                 };
 
+            case ADD_USER:
+                console.log('In the ADDUSER');
+                console.log(action)
 
-                
+                let newUsersArray = [...state.users, action.payload]
+                return{
+                    ...state,
+                    users: newUsersArray,
+                }
+            
             //map,filter,reduce(Use in an existent array, after is  done its going to give you a new array)
             //we passed in an ID
             //we need to take the current state array

@@ -1,9 +1,10 @@
 import React, { Component } from "react";
+import { addUser } from "./actions/userActions";
+import { connect } from "react-redux";
 
 export class AddUser extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       userName: "",
       id: "",
@@ -18,7 +19,8 @@ export class AddUser extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.add({
+    console.log('clicked')
+    this.props.addUser({
       name: this.state.userName,
       id: this.state.id,
     });
@@ -63,4 +65,4 @@ export class AddUser extends Component {
   }
 }
 
-export default AddUser;
+export default connect(null, { addUser })(AddUser);
